@@ -1,20 +1,5 @@
 import { TestInfo, Page, Locator, expect, BrowserContext, Request  } from '@playwright/test';
 
-//import { firefox, Browser, BrowserContext } from 'playwright';
-/*
-export async function screenshotOnFailure({ page }: { page: Page }, testInfo: TestInfo) {
-  if (testInfo.status !== testInfo.expectedStatus) {
-    // Get a unique place for the screenshot.
-    const screenshotPath = testInfo.outputPath(`failure.png`);
-    // Add it to the report.
-    testInfo.attachments.push({ name: 'screenshot', path: screenshotPath, contentType: 'image/png' });
-    // Take the screenshot itself.
-    await page.screenshot({ path: screenshotPath, timeout: 5000 });
-  }
-}
-*/
-
-
 export class Helper {
 
   static getLeftNavMask(page: Page) {
@@ -91,34 +76,6 @@ export class Helper {
     return emailHex;
   }
 
-  static async loginWithMagicLink(page: Page, context: BrowserContext, browserName: String, url: string, email: string, magicLinkName: string) {
-    await page.goto(url, { waitUntil: 'networkidle' });
-
-    await page.getByRole('button', { name: magicLinkName }).click();
-    await page.getByPlaceholder('Email address').fill(email);
-    await page.getByRole('button', { name: 'Send Email' }).click();
-    await page.getByText('We just sent a link to your email cartertest6666@gmail.com').waitFor(); 
-
-    await page.goto('https://www.google.com/gmail/about/');
-    await page.getByRole('link', { name: 'Sign in' }).click();
-    await page.waitForLoadState("networkidle");
-    await page.getByRole('link', { name: 'Carter Test cartertest6666@gmail.com' }).click();
-
-    await page.getByText('Sign in to your twocents account').last().click();
-    await page.getByText('the opportunity network', { exact: true }).waitFor();
-
-    const pagePromise = context.waitForEvent('page');
-    await page.getByRole('link', { name: 'Sign In' }).click();
-    const twocentsPage = await pagePromise;
-    await expect(twocentsPage.getByText(email)).toBeVisible();
-
-    await page.getByRole('button', { name: 'Delete' }).click();
-
-    await twocentsPage.waitForLoadState("networkidle", {timeout: 30000});
-
-    return twocentsPage;
-  }
-
   static async loginWithMSFT (page: Page, browserName: String, url: string, msftAccount: string, scrollPage: boolean = false) {
     await page.goto(url, { waitUntil: 'networkidle' });
 
@@ -141,16 +98,13 @@ export class Helper {
 
     await page.getByRole('button', { name: 'See my Opportunities' }).click();
 
-    //await page.getByRole('navigation').getByText('Inbox').waitFor();
     await page.waitForLoadState("networkidle", {timeout: 30000});
     await expect(page.getByText(msftAccount)).toBeVisible();
   }
 
-  //static async rejoinWithGoogle (page: Page, browserName)
 
   static async loginWithGoogle (page: Page, browserName: String, url: string, gmailAccount: string, scrollPage: boolean = false, fullName: string, firstName: string,
       onboarding: boolean = false) {
-    //const url = '/auth/success';
   
     //always override default waitUntil, set to networkidle, otherwise things run too fast in headless
     await page.goto(url, { waitUntil: 'networkidle' });
@@ -182,39 +136,10 @@ export class Helper {
           await pagePopup.getByRole('button', { name: 'Confirm' }).click();
       }
     }
-  /*
-    if (browserName === 'firefox') {
-      let authPageLoc = page.getByRole('heading', { name: 'We failed to authenticate your email account.' })
 
-      try {
-        await authPageLoc.waitFor({timeout: 2000});
-      } catch (e) {
-
-      }
-
-      await page.waitForTimeout(Math.random() * 10000);
-  
-      if (await authPageLoc.count() === 1) {
-        await page.getByRole('link', { name: 'Try Again' }).click();
-        await page.getByRole('link', { name: '2c Inbox' }).click();
-        await page.waitForLoadState("networkidle", {timeout: 30 * 1000});
-        //await page.waitForNavigation({waitUntil: 'networkidle'});
-        await page.getByRole('link', { name: `Carter Test ${gmailAccount}@gmail.com` }).click();
-        await page.getByRole('button', { name: 'Continue' }).click();
-        await page.getByRole('checkbox', { name: 'View your email messages and settings. Learn more' }).check();
-        await page.getByRole('checkbox', { name: 'Read, compose, and send emails from your Gmail account. Learn more' }).check();
-        await page.getByRole('button', { name: 'Continue' }).click();
-
-        const page2Promise = page.waitForEvent('popup');
-        await page.locator('iframe[title="Sign in with Google Button"] + div').click();
-        const page2 = await page2Promise;
-        await page2.getByRole('link', { name: `Google Account, Carter Test\'s profile picture, ${gmailAccount}@gmail.com, Carter Test` }).click();
-      }
-    }*/
     if (!onboarding)
       await page.getByRole('button', { name: 'See my Opportunities' }).click();
 
-    //await page.getByRole('navigation').getByText('Inbox').waitFor();
     await page.waitForLoadState("networkidle", {timeout: 30000});
   }
 
@@ -243,12 +168,6 @@ export class Helper {
     await Helper.linkCheck(page, '/login', page.getByRole('link', { name: 'Sign In' }).last(), browserName, true);
     await Helper.linkCheck(page, '/signup', page.getByRole('link', { name: 'Get Started' }).last(), browserName, true);
     
-  
-    /*
-    if (!noSignupLink) {
-      await linkCheck(page, '/waitlist/signup', page.getByRole('list').filter({ hasText: 'About & ContactPrivacyTerms of ServiceDisclosureJoin the Waitlist' }).getByRole('link', { name: 'Join the Waitlist' }), browserName, true);
-    }
-    */
   }
   
   static async linkCheck(page: Page, nextUrl: string, locator: Locator, browserName: string, scrollPage: boolean = false) {
@@ -262,15 +181,12 @@ export class Helper {
   
     await page.waitForTimeout(1000);
     await locator.click();
-    //await page.waitForURL(nextUrl, {timeout: 30 * 1000});
     await page.waitForLoadState("networkidle", {timeout: 30 * 1000});
-    //await page.waitForTimeout(500);
     await expect(page).toHaveURL(nextUrl);
   
     if (origUrl !== page.url())
     {
       await page.goBack();
-      //await page.waitForURL(origUrl, {timeout: 30 * 1000});
       await page.waitForLoadState("networkidle", {timeout: 30 * 1000});
     }
     
@@ -331,7 +247,6 @@ export class Helper {
 
     await page.getByRole('navigation').getByText('Inbox').waitFor();
     await page.waitForLoadState("networkidle", {timeout: 30000});
-    //await page.goto('/opportunities');
 
     await page.context().storageState({ path: fileNamePathLogin });
   }

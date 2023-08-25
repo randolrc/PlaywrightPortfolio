@@ -2,8 +2,11 @@ import { test, expect, Page, Locator, APIRequestContext, APIRequest } from '@pla
 import * as stoStrings from '../util/storageStrings';
 import { Helper } from '../util/helper';
 
-test('@smoke API basic response tests', async ({ request, browser }) => {
+    //these should probably be in a separate project, unless there's some trick to have them run exactly once per run 
+    //regardless of the number of browsers set in config
 
+test('@smoke API basic response tests', async ({ request, browser }) => {
+    
     //non-publicly available/visible APIs
     let baseUrl = process.env.BASE_API_URL as string;
 

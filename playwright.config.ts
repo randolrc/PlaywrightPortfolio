@@ -74,7 +74,7 @@ const config: PlaywrightTestConfig = {
       },
     },
   
-
+/*
     {
       name: 'chromium',
       use: {
@@ -93,7 +93,7 @@ const config: PlaywrightTestConfig = {
         //viewport: {width: 1280, height: 700},
       },
     },
-
+*/
 /*
      {
        name: 'Mobile Chrome',
