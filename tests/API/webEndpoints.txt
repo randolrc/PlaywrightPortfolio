@@ -1,0 +1,2 @@
+api/profile
+api/notifications/all
