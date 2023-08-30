@@ -1,5 +1,5 @@
-import { test, expect, Page, Locator, APIRequestContext } from '@playwright/test';
-import * as stoStrings from '../util/storageStrings';
+import { test, expect } from '@playwright/test';
+import * as stoStrings from '@util/storageStrings';
 
 test.use({ storageState: stoStrings.TWOCENTS_LOGIN_ONB });
 test('POST - web /api/profile - rejecting long strings', async ({ request }) => {
