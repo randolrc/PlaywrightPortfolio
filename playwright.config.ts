@@ -69,8 +69,8 @@ const config: PlaywrightTestConfig = {
       name: 'firefox',
       use: {
         ...devices['Desktop Firefox'],
-        viewport: {width: 1920, height: 1080},
-        //viewport: {width: 1280, height: 700},
+        //viewport: {width: 1920, height: 1080},
+        viewport: {width: 1280, height: 700},
       },
     },
   
@@ -79,12 +79,13 @@ const config: PlaywrightTestConfig = {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        viewport: {width: 1920, height: 1080},
+        //viewport: {width: 1920, height: 1080},
+        viewport: {width: 1280, height: 700},
         permissions: ["clipboard-read", "clipboard-write"],
       },
     },
-    
-
+  */  
+/*
     {
       name: 'webkit',
       use: {

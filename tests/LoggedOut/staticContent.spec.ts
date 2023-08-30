@@ -1,13 +1,13 @@
 import { test, expect, Page, Locator } from '@playwright/test';
-import { Helper } from '../util/helper';
-import { StaticPage } from './staticPage';
+import { Helper } from '@util/helper';
+import { StaticPage } from '@pages/staticPage';
 
 test('@smoke /homepage has expected content', async ({ page, headless, browserName, isMobile }) => {
   let url = '/';
-  let homeTitle = 'twocents | The Opportunity Network for Business';
+  let title = 'twocents | The Opportunity Network for Business';
   let pageName = 'homepage';
 
-  let staticPage = new StaticPage(page, url, pageName, homeTitle, headless, browserName);
+  let staticPage = new StaticPage(page, url, pageName, title, headless, browserName);
 
   await staticPage.gotoAndVerify();
 
@@ -19,10 +19,10 @@ test('@smoke /homepage has expected content', async ({ page, headless, browserNa
 
 test('@smoke /about has expected content', async ({ page, headless, browserName, isMobile }) => {
   let url = '/about';
-  let homeTitle = 'twocents | About the opportunity network';
+  let title = 'twocents | About the opportunity network';
   let pageName = 'about';
 
-  let staticPage = new StaticPage(page, url, pageName, homeTitle, headless, browserName);
+  let staticPage = new StaticPage(page, url, pageName, title, headless, browserName);
 
   await staticPage.gotoAndVerify();
 
@@ -31,40 +31,40 @@ test('@smoke /about has expected content', async ({ page, headless, browserName,
 
 test('/privacy has expected content', async ({ page, headless, browserName, isMobile }) => {
   let url = '/privacy';
-  let homeTitle = 'twocents | Our commitment to privacy';
+  let title = 'twocents | Our commitment to privacy';
   let pageName = 'privacy';
 
-  let staticPage = new StaticPage(page, url, pageName, homeTitle, headless, browserName);
+  let staticPage = new StaticPage(page, url, pageName, title, headless, browserName);
 
   await staticPage.gotoAndVerify();
 });
 
 test('/terms has expected content', async ({ page, headless, browserName, isMobile }) => {
   let url = '/terms';
-  let homeTitle = 'twocents | Terms of Use';
+  let title = 'twocents | Terms of Use';
   let pageName = 'terms';
 
-  let staticPage = new StaticPage(page, url, pageName, homeTitle, headless, browserName);
+  let staticPage = new StaticPage(page, url, pageName, title, headless, browserName);
 
   await staticPage.gotoAndVerify();
 });
 
 test('/disclosure has expected content', async ({ page, headless, browserName, isMobile }) => {
   let url = '/disclosure';
-  let homeTitle = '';
+  let title = '';
   let pageName = 'disclosure';
 
-  let staticPage = new StaticPage(page, url, pageName, homeTitle, headless, browserName);
+  let staticPage = new StaticPage(page, url, pageName, title, headless, browserName);
 
   await staticPage.gotoAndVerify();
 });
 
 test('/faq-prospect has expected content', async ({ page, headless, browserName, isMobile }) => {
   let url = '/faq-prospect';
-  let homeTitle = '';
+  let title = '';
   let pageName = 'faq-prospectDefault';
 
-  let staticPage = new StaticPage(page, url, pageName, homeTitle, headless, browserName);
+  let staticPage = new StaticPage(page, url, pageName, title, headless, browserName);
 
   await staticPage.gotoAndVerify();
 
@@ -88,7 +88,6 @@ test('@smoke invitation page, check content', async ({ page, browserName, baseUR
   await staticPage.gotoAndVerify();
 
   await Helper.linkCheck(page, '/signup', page.getByRole('link', { name: 'Get Started' }).nth(1), browserName);
-
   await Helper.linkCheck(page, '/signup', page.getByRole('link', { name: 'Get Started' }).nth(2), browserName);
 
 });

@@ -1,16 +1,11 @@
 import { test, expect, firefox, request, Page, Locator } from '@playwright/test';
-import { Helper } from '../../util/helper';
-import * as stoStrings from '../../util/storageStrings';  
-import {PostModal} from './postModal';
-import {OpptyPage} from './opptyPage';
-import { ProfilePage } from '../Profile/profilePage';
-
-let postModal: PostModal;
-let opptyPage: OpptyPage;
+import { Helper } from '@util/helper';
+import * as stoStrings from '@util/storageStrings';  
+import {OpptyPage} from '@pages/opptyPage';
 
 test.use({ storageState: stoStrings.TWOCENTS_LOGIN });
 
-test('@smoke view profile, reply to post, share post, view all messages, archive post', async ({ page, headless, isMobile, browserName, browser, baseURL }) => {
+test('@smoke view profile, reply to post, share post, view all messages, archive post', async ({ page, browser }) => {
     
     const posterContext = await browser.newContext({ storageState: stoStrings.TWOCENTS_LOGIN_VIEW });
     const posterPage = await posterContext.newPage();
@@ -58,8 +53,9 @@ test('@smoke new activity button that refreshes opportunity page', async ({ page
 
     let randHex1 = Helper.genRandHex(6);
     let randHex2 = Helper.genRandHex(6);
-    let postText1 = `This is a test post to test the new activity toast notification and refresh link. ${randHex1}`;
-    let postText2 = `This is a test post to test the new activity toast notification and refresh link. ${randHex2}`;
+    let postStart = 'This is a test post to test the new activity toast notification and refresh link.';
+    let postText1 = `${postStart} ${randHex1}`;
+    let postText2 = `${postStart} ${randHex2}`;
 
     await optyPageReceiver.goto();
     await opptyPagePoster.goto();

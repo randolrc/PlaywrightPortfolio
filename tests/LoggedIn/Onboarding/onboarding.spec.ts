@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import * as stoStrings from '../../util/storageStrings';
-import { ProfilePage } from '../Profile/profilePage';
-import { Helper } from '../../util/helper';
-import { OnbPage } from './onbPage';
+import * as stoStrings from '@util/storageStrings';
+import { ProfilePage } from '@pages/profilePage';
+import { Helper } from '@util/helper';
+import { OnbPage } from '@pages/onboardingPage';
 
 let profilePage: ProfilePage;
 let onbPage: OnbPage;
@@ -93,7 +93,7 @@ test('set random tags, confirm save', async ({ page, browserName, headless, isMo
 
     await onbPage.btnNext.click();
 
-    if (tagsChosen.includes(onbPage.jobSeeking)) {
+    if (tagsChosen.includes(onbPage.txtJobSeeking)) {
         await onbPage.btnNext.click();
     }
 
@@ -119,23 +119,16 @@ test('5k char limit on description', async ({ page, browserName, headless, isMob
 
     await onbPage.goto();
     await onbPage.btnLetsGo.click();
-
     await onbPage.btnNext.click();
-
     await onbPage.fieldDetails.click();
-
     await onbPage.fieldDetails.type(descText);
-
     await expect(page.getByText('500/5000')).toBeVisible();
 
     let longDescText = descText + descText + descText + descText + descText + descText + descText + descText + descText + descText;
 
     await onbPage.fieldDetails.fill(longDescText);
-
     await expect(page.getByText('5000/5000')).toBeVisible();
-
     await onbPage.fieldDetails.type('1');
-
     await expect(page.getByText('5001/5000 Description must be at most 5000 characters')).toBeVisible();
 
     await onbPage.btnNext.click();
@@ -146,5 +139,5 @@ test('5k char limit on description', async ({ page, browserName, headless, isMob
 
     await onbPage.btnNext.click();
     await expect(onbPage.fieldCompany).toBeVisible();
-    
+
 });

@@ -1,10 +1,10 @@
-import { test, expect, firefox, request } from '@playwright/test';
-import { Helper } from '../../util/helper';
-import * as stoStrings from '../../util/storageStrings';
+import { test, expect } from '@playwright/test';
+import { Helper } from '@util/helper';
+import * as stoStrings from '@util/storageStrings';
 
 test.use({ storageState: stoStrings.EMAIL_LOGIN });
 
-test('404 results in requesting actions for non-owned threads', async ({ page, browserName, request }) => {
+test('404 results in requesting actions for non-owned threads', async ({ page, request }) => {
     
     let foundThreadToAlter = false;
     const nonOwnedThreadID = process.env.SAMPLE_THREAD_ID as string;
@@ -24,7 +24,6 @@ test('404 results in requesting actions for non-owned threads', async ({ page, b
     });
 
     const routePromise = page.route(`https://staging.twocents.io/api/thread/call/${ownedThreadID}?call=actions`, async (route, request) => {
-        console.log('helloworld');
         await route.continue({url: `https://staging.twocents.io/api/thread/call/${nonOwnedThreadID}?call=actions`});
     });
 
@@ -42,9 +41,8 @@ test('override user role, try going to /admin', async ({ page, browserName }) =>
     await page.route("https://staging.twocents.io/api/auth/callback/google", async (route, request) => {
 
         const response = await route.fetch();
-        
-        let body = await response.text();
 
+        let body = await response.text();
         body = body.replace('"role":"USER"', '"role":"ADMIN"');
 
         await route.fulfill({

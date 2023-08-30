@@ -1,4 +1,4 @@
-import {  Page, Locator, expect, APIRequestContext } from '@playwright/test';
+import {  Page, Locator, expect } from '@playwright/test';
 
 export class OpptyPage {
     page: Page;
@@ -117,9 +117,7 @@ export class OpptyPage {
         const routePromise = this.page.route(`https://staging.twocents.io/api/opportunities`, async (route, request) => {
 
             const response = await route.fetch();
-            
             let body = await response.text();
-
             let json = await JSON.parse(body);
 
             let post;

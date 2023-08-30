@@ -173,8 +173,6 @@ export class PostModal {
 
         await this.page.waitForTimeout(1000);
         let req = await this.clickSubmitPostButton();
-
-        
            
         return req; 
     }

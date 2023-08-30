@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@util/*": ["util/*"],
+        "@pages/staticPage": ["LoggedOut/staticPage"],
+        "@pages/profilePage": ["LoggedIn/Profile/profilePage"],
+        "@pages/onboardingPage": ["LoggedIn/Onboarding/onbPage"],
+        "@pages/opptyPage": ["LoggedIn/Opportunities/opptyPage"],
+        "@modals/postModal": ["LoggedIn/Opportunities/postModal"]
+      }
+    }
+    
+  }

@@ -1,7 +1,7 @@
 import { test, expect, Page, Locator, BrowserContext } from '@playwright/test';
-import { Helper } from '../../util/helper';
-import * as stoStrings from '../../util/storageStrings';
-import { ProfilePage } from './profilePage';
+import { Helper } from '@util/helper';
+import * as stoStrings from '@util/storageStrings';
+import { ProfilePage } from '@pages/profilePage';
 
 test.use({ storageState: stoStrings.TWOCENTS_LOGIN });
 
@@ -13,7 +13,6 @@ test('@smoke Edit and save profile', async ({ page, headless, isMobile, browserN
     await profilePage.setEmptyProfile(request);
 
     await profilePage.goto();
-
     await profilePage.btnCreate.click();
 
     await Helper.checkContent(page, "", headless, 'NoProfileSetup', browserName);
