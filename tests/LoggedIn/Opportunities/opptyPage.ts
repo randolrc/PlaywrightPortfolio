@@ -161,11 +161,15 @@ export class OpptyPage {
         return resp;
     }
 
-    async deletePost() {
+    async deletePostWithUI() {
         await this.btnPostOptionDropdown.click();
         await this.btnDrpdwnCancelPost.click();
         await this.btnModalCancelPost.click();
         await expect(this.msgPostCanceled).toBeVisible();
         await this.page.waitForLoadState("networkidle"); 
+    }
+
+    async deletePostWithAPI(postId: string) {
+        await this.page.request.post(`/api/posts/${postId}/cancel`);
     }
 }

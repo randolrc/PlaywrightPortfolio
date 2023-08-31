@@ -1,4 +1,4 @@
-import { TestInfo, Page, Locator, expect, BrowserContext, Request  } from '@playwright/test';
+import { Page, Locator, expect, Request, Response, APIResponse  } from '@playwright/test';
 
 export class Helper {
 
@@ -50,6 +50,10 @@ export class Helper {
 
   static async getJsonFromReq(req: Request) {
     let resp = await req.response();
+    return this.getJsonFromResp(resp);
+  }
+
+  static async getJsonFromResp(resp: APIResponse | Response) {
     let body = await resp?.text() as string;
     let json = await JSON.parse(body);
 

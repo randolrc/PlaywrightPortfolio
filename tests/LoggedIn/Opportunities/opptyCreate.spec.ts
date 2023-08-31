@@ -17,8 +17,9 @@ test('@smoke view profile, reply to post, share post, view all messages, archive
 
     await opptyPagePoster.goto();
 
-    await opptyPagePoster.APINewTestPost(`Reply to this test post and then delete it, please ${randHex}`);
-
+    let resp = await opptyPagePoster.APINewTestPost(`Reply to this test post and then delete it, please ${randHex}`);
+    let json = await Helper.getJsonFromResp(resp);
+    
     await optyPageReceiver.setPostLocators(randHex);
 
     await optyPageReceiver.goto();
@@ -36,8 +37,7 @@ test('@smoke view profile, reply to post, share post, view all messages, archive
     await expect(optyPageReceiver.msgPostArchive).toBeVisible();
     await expect(optyPageReceiver.postLoc).toBeHidden();
     
-    await opptyPagePoster.deletePost();
-    await expect(opptyPagePoster.APIPostMsg).toBeHidden();
+    await opptyPagePoster.deletePostWithAPI(json.id);
 
     await posterPage.close();
     await posterContext.close();
@@ -60,16 +60,19 @@ test('@smoke new activity button that refreshes opportunity page', async ({ page
     await optyPageReceiver.goto();
     await opptyPagePoster.goto();
 
-    await opptyPagePoster.APINewTestPost(postText1);
-    await opptyPagePoster.APINewTestPost(postText2);
+    let resp1 = await opptyPagePoster.APINewTestPost(postText1);
+    let resp2 = await opptyPagePoster.APINewTestPost(postText2);
+
+    let json1 = await Helper.getJsonFromResp(resp1);
+    let json2 = await Helper.getJsonFromResp(resp2);
 
     await page.getByRole('button', { name: 'New activity (2)' }).click();
     await expect(page.getByText(postText1)).toBeVisible();
     await expect(page.getByText(postText2)).toBeVisible();
 
     await posterPage.reload();
-    await opptyPagePoster.deletePost();
-    await opptyPagePoster.deletePost();
+    await opptyPagePoster.deletePostWithAPI(json1.id);
+    await opptyPagePoster.deletePostWithAPI(json2.id);
 
     await posterPage.close();
     await posterContext.close();
