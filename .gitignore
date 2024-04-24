@@ -9,3 +9,5 @@ storageStates/
 /test-results/
 /playwright-report/
 /playwright/.cache/
+/tests/scratch*
+

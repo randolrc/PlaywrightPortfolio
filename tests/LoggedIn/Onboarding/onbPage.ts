@@ -5,135 +5,71 @@ export class OnbPage {
 
     page: Page;
 
-    btnSkip: Locator;
-    btnLetsGo: Locator;
-    btnBack: Locator;
-    btnNext: Locator;
-    btnDone: Locator;
+    static txtJobSeeking = 'Job Seeking';
+    static txtHiring = 'Hiring';
+    static txtInvesting = 'Investing';
+    static txtFundraising = 'Fundraising';
+    static txtNetworking = 'Networking';
+    static txtSelling = 'Selling Services';
+    static txtSaas = 'SaaS';
+    static txtSeeking = 'Seeking Services';
+    static txtSeriesA = 'Series A';
+    static txtHealthcare = 'Healthcare';
+    static txtAi = 'AI';
+    static txtBiotech = 'Biotech';
+    static txtFounder = 'Founder';
+    static txtSeed = 'Seed Stage';
+    static txtEdu = 'Education';
+    static txtEnergy = 'Energy';
+    static txtFinance = 'Finance';
+    static txtMarketing = 'Marketing';
+    static txtEngineering = 'Engineering';
+    static txtPm = 'Product Management';
 
-    txtJobSeeking: string;
-    txtHiring: string;
-    txtInvesting: string;
-    txtFundraising: string;
-    txtNetworking: string;
-    txtSelling: string;
-    txtSaas: string;
-    txtSeeking: string;
-    txtSeriesA: string;
-    txtHealthcare: string;
-    txtAi: string;
-    txtBiotech: string;
-    txtFounder: string;
-    txtSeed: string;
-    txtEdu: string;
-    txtEnergy: string;
-    txtFinance: string;
-    txtMarketing: string;
-    txtEngineering: string;
-    txtPm: string;
+    constructor(page: Page,
+            public btnSkip = page.getByRole('button', { name: 'Skip' }),
+            public btnLetsGo = page.getByRole('button', { name: 'Let\'s go' }),
+            public btnBack = page.getByRole('button', { name: 'Back' }),
+            public btnNext = page.getByRole('button', { name: 'Next' }),
+            public btnDone = page.getByRole('button', { name: 'Done' }),
 
-    btnJobSeeking: Locator;
-    btnHiring: Locator;
-    btnInvesting: Locator;
-    btnFundraising: Locator;
-    btnNetworking: Locator;
-    btnSelling: Locator;
-    btnSaas: Locator;
-    btnSeeking: Locator;
-    btnSeriesA: Locator;
-    btnHealthcare: Locator;
-    btnAI: Locator;
-    btnBiotech: Locator;
-    btnFounder: Locator;
-    btnSeed: Locator;
-    btnEdu: Locator;
-    btnEnergy: Locator;
-    btnFinance: Locator;
-    btnMarketing: Locator;
-    btnEngineering: Locator;
-    btnPM: Locator;
-    btnCustom: Locator;
+            public btnJobSeeking = page.getByRole('button', { name: OnbPage.txtJobSeeking }),
+            public btnHiring = page.getByRole('button', { name: OnbPage.txtHiring }),
+            public btnInvesting = page.getByRole('button', { name: OnbPage.txtInvesting }),
+            public btnFundraising = page.getByRole('button', { name: OnbPage.txtFundraising }),
+            public btnNetworking = page.getByRole('button', { name: OnbPage.txtNetworking }),
+            public btnSelling = page.getByRole('button', { name: OnbPage.txtSelling }),
+            public btnSaas = page.getByRole('button', { name: OnbPage.txtSaas }),
+            public btnSeeking = page.getByRole('button', { name: OnbPage.txtSeeking }),
+            public btnSeriesA = page.getByRole('button', { name: OnbPage.txtSeriesA  }),
+            public btnHealthcare = page.getByRole('button', { name: OnbPage.txtHealthcare }),
+            public btnAI = page.getByRole('button', { name: OnbPage.txtAi, exact: true }),
+            public btnBiotech = page.getByRole('button', { name: OnbPage.txtBiotech }),
+            public btnFounder = page.getByRole('button', { name: OnbPage.txtFounder }),
+            public btnSeed = page.getByRole('button', { name: OnbPage.txtSeed }),
+            public btnEdu = page.getByRole('button', { name: OnbPage.txtEdu }),
+            public btnEnergy = page.getByRole('button', { name: OnbPage.txtEnergy }),
+            public btnFinance = page.getByRole('button', { name: OnbPage.txtFinance }),
+            public btnMarketing = page.getByRole('button', { name: OnbPage.txtMarketing }),
+            public btnEngineering = page.getByRole('button', { name: OnbPage.txtEngineering }),
+            public btnPM = page.getByRole('button', { name: OnbPage.txtPm }),
+            public btnCustom = page.getByRole('button', { name: 'Custom', exact: true }),
 
-    dropdownLFW: Locator;
-    selectionLFWYes: Locator;
-    selectionLFWNo: Locator;
+            public dropdownLFW = page.locator('div[id="job-seeking"]'),
+            public selectionLFWYes = page.getByRole('option', { name: 'Yes, I am looking for a job' }),
+            public selectionLFWNo = page.getByRole('option', { name: 'No, not job seeking right now' }),
 
-    dropdownExp: Locator;
-    selectionExpInt: Locator;
-    selectionExpEntry: Locator;
-    selectionExpExp: Locator;
+            public dropdownExp = page.locator('div[id="experience"]'),
+            public selectionExpInt = page.getByRole('option', { name: 'Internship' }),
+            public selectionExpEntry = page.getByRole('option', { name: 'Entry Level' }),
+            public selectionExpExp = page.getByRole('option', { name: 'Experienced' }),
 
-    fieldCustom: Locator;
-    fieldDetails: Locator;
-    fieldJobTitle: Locator;
-    fieldCompany: Locator;
-
-    constructor(page: Page) {
+            public fieldCustom = page.getByRole('textbox'),
+            public fieldDetails = page.getByPlaceholder('This info will appear on your twocents profile to help others get to know you'),
+            public fieldJobTitle = page.getByPlaceholder('Your job title'),
+            public fieldCompany = page.getByPlaceholder('Company')
+        ) {
         this.page = page;
-
-        this.btnSkip = page.getByRole('button', { name: 'Skip' });
-        this.btnLetsGo = page.getByRole('button', { name: 'Let\'s go' });
-        this.btnBack = page.getByRole('button', { name: 'Back' });
-        this.btnNext = page.getByRole('button', { name: 'Next' });
-        this.btnDone = page.getByRole('button', { name: 'Done' });
-
-        this.txtJobSeeking = 'Job Seeking';
-        this.txtHiring = 'Hiring';
-        this.txtInvesting = 'Investing';
-        this.txtFundraising = 'Fundraising';
-        this.txtNetworking = 'Networking';
-        this.txtSelling = 'Selling Services';
-        this.txtSaas = 'SaaS';
-        this.txtSeeking = 'Seeking Services';
-        this.txtSeriesA = 'Series A';
-        this.txtHealthcare = 'Healthcare';
-        this.txtAi = 'AI';
-        this.txtBiotech = 'Biotech';
-        this.txtFounder = 'Founder';
-        this.txtSeed = 'Seed Stage';
-        this.txtEdu = 'Education';
-        this.txtEnergy = 'Energy';
-        this.txtFinance = 'Finance';
-        this.txtMarketing = 'Marketing';
-        this.txtEngineering = 'Engineering';
-        this.txtPm = 'Product Management';
-
-        this.btnJobSeeking = page.getByRole('button', { name: this.txtJobSeeking });
-        this.btnHiring = page.getByRole('button', { name: this.txtHiring });
-        this.btnInvesting = page.getByRole('button', { name: this.txtInvesting });
-        this.btnFundraising = page.getByRole('button', { name: this.txtFundraising });
-        this.btnNetworking = page.getByRole('button', { name: this.txtNetworking });
-        this.btnSelling = page.getByRole('button', { name: this.txtSelling });
-        this.btnSaas = page.getByRole('button', { name: this.txtSaas });
-        this.btnSeeking = page.getByRole('button', { name: this.txtSeeking });
-        this.btnSeriesA = page.getByRole('button', { name: this.txtSeriesA  });
-        this.btnHealthcare = page.getByRole('button', { name: this.txtHealthcare });
-        this.btnAI = page.getByRole('button', { name: this.txtAi, exact: true });
-        this.btnBiotech = page.getByRole('button', { name: this.txtBiotech });
-        this.btnFounder = page.getByRole('button', { name: this.txtFounder });
-        this.btnSeed = page.getByRole('button', { name: this.txtSeed });
-        this.btnEdu = page.getByRole('button', { name: this.txtEdu });
-        this.btnEnergy = page.getByRole('button', { name: this.txtEnergy });
-        this.btnFinance = page.getByRole('button', { name: this.txtFinance });
-        this.btnMarketing = page.getByRole('button', { name: this.txtMarketing });
-        this.btnEngineering = page.getByRole('button', { name: this.txtEngineering });
-        this.btnPM = page.getByRole('button', { name: this.txtPm });
-        this.btnCustom = page.getByRole('button', { name: 'Custom', exact: true });
-
-        this.dropdownLFW = page.locator('div[id="job-seeking"]');
-        this.selectionLFWYes = page.getByRole('option', { name: 'Yes, I am looking for a job' });
-        this.selectionLFWNo = page.getByRole('option', { name: 'No, not job seeking right now' });
-
-        this.dropdownExp = page.locator('div[id="experience"]');
-        this.selectionExpInt = page.getByRole('option', { name: 'Internship' });
-        this.selectionExpEntry = page.getByRole('option', { name: 'Entry Level' });
-        this.selectionExpExp = page.getByRole('option', { name: 'Experienced' });
-
-        this.fieldCustom = page.getByRole('textbox');
-        this.fieldDetails = page.getByPlaceholder('This info will appear on your twocents profile to help others get to know you');
-        this.fieldJobTitle = page.getByPlaceholder('Your job title');
-        this.fieldCompany = page.getByPlaceholder('Company');
-
     }
 
     
@@ -202,83 +138,83 @@ export class OnbPage {
             switch (rand) {
                 case 0:
                     tagLoc.push(this.btnJobSeeking);
-                    tagStrings.push(this.txtJobSeeking);
+                    tagStrings.push(OnbPage.txtJobSeeking);
                     break;
                 case 1:
                     tagLoc.push(this.btnHiring);
-                    tagStrings.push(this.txtHiring);
+                    tagStrings.push(OnbPage.txtHiring);
                     break;
                 case 2:
                     tagLoc.push(this.btnInvesting);
-                    tagStrings.push(this.txtInvesting);
+                    tagStrings.push(OnbPage.txtInvesting);
                     break;         
                 case 3:
                     tagLoc.push(this.btnFundraising);
-                    tagStrings.push(this.txtFundraising);
+                    tagStrings.push(OnbPage.txtFundraising);
                     break;   
                 case 4:
                     tagLoc.push(this.btnNetworking);
-                    tagStrings.push(this.txtNetworking);
+                    tagStrings.push(OnbPage.txtNetworking);
                     break;    
                 case 5:
                     tagLoc.push(this.btnSelling);
-                    tagStrings.push(this.txtSelling);
+                    tagStrings.push(OnbPage.txtSelling);
                     break;   
                 case 6:
                     tagLoc.push(this.btnSaas);
-                    tagStrings.push(this.txtSaas);
+                    tagStrings.push(OnbPage.txtSaas);
                     break; 
                 case 7:
                     tagLoc.push(this.btnSeeking);
-                    tagStrings.push(this.txtSeeking);
+                    tagStrings.push(OnbPage.txtSeeking);
                     break; 
                 case 8:
                     tagLoc.push(this.btnSeriesA);
-                    tagStrings.push(this.txtSeriesA);
+                    tagStrings.push(OnbPage.txtSeriesA);
                     break; 
                 case 9:
                     tagLoc.push(this.btnHealthcare);
-                    tagStrings.push(this.txtHealthcare);
+                    tagStrings.push(OnbPage.txtHealthcare);
                     break; 
                 case 10:
                     tagLoc.push(this.btnAI);
-                    tagStrings.push(this.txtAi);
+                    tagStrings.push(OnbPage.txtAi);
                     break; 
                 case 11:
                     tagLoc.push(this.btnBiotech);
-                    tagStrings.push(this.txtBiotech);
+                    tagStrings.push(OnbPage.txtBiotech);
                     break; 
                 case 12:
                     tagLoc.push(this.btnFounder);
-                    tagStrings.push(this.txtFounder);
+                    tagStrings.push(OnbPage.txtFounder);
                     break; 
                 case 13:
                     tagLoc.push(this.btnSeed);
-                    tagStrings.push(this.txtSeed);
+                    tagStrings.push(OnbPage.txtSeed);
                     break; 
                 case 14:
                     tagLoc.push(this.btnEdu);
-                    tagStrings.push(this.txtEdu);
+                    tagStrings.push(OnbPage.txtEdu);
                     break; 
                 case 15:
                     tagLoc.push(this.btnEnergy);
-                    tagStrings.push(this.txtEnergy);
+                    tagStrings.push(OnbPage.txtEnergy);
                     break; 
                 case 16:
                     tagLoc.push(this.btnFinance);
-                    tagStrings.push(this.txtFinance);
+                    tagStrings.push(OnbPage.txtFinance);
                     break; 
                 case 17:
                     tagLoc.push(this.btnMarketing);
-                    tagStrings.push(this.txtMarketing);
+                    tagStrings.push(OnbPage.txtMarketing);
                     break; 
                 case 18:
                     tagLoc.push(this.btnEngineering);
-                    tagStrings.push(this.txtEngineering);
+                    tagStrings.push(OnbPage.txtEngineering);
                     break; 
                 case 19:
                     tagLoc.push(this.btnPM);
-                    tagStrings.push(this.txtPm);
+                    tagStrings.push(OnbPage.txtPm);
                     break; 
             }
         }

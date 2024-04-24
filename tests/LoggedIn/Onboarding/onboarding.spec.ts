@@ -93,7 +93,7 @@ test('set random tags, confirm save', async ({ page, browserName, headless, isMo
 
     await onbPage.btnNext.click();
 
-    if (tagsChosen.includes(onbPage.txtJobSeeking)) {
+    if (tagsChosen.includes(OnbPage.txtJobSeeking)) {
         await onbPage.btnNext.click();
     }
 
